@@ -1,0 +1,13 @@
+html {
+  font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+html, body {
+  margin: 0;
+  padding:0;
+  height: 100%;
+  overflow-y: hidden;
+}
+#playerDiv {
+  height: calc(100% - 150px);
+  width: 100%;
+}
