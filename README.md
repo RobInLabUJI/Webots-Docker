@@ -21,3 +21,7 @@ where `<WORLD>` is the complete path of the world file to simulate.
 Open a new broser tab/window, and open the file `index.html`.
 
 Press the `connect` button, and that's it! (the left buttons of the bottom line don't work, though)
+
+## Acknowledgments
+
+Dockerfile heavily inspired by [Cyberbotics](https://github.com/cyberbotics/webots/wiki/Docker), thanks a lot!!!
