@@ -16,7 +16,7 @@ Open a terminal in Jupyter lab and run:
 ./launch_webots.sh <WORLD>
 ````
 
-where <WORLD> is the complete path of the world file to simulate.
+where `<WORLD>` is the complete path of the world file to simulate.
   
 Open a new broser tab/window, and open the file `index.html`.
 
