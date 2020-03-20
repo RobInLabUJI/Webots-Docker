@@ -20,4 +20,4 @@ where `<WORLD>` is the complete path of the world file to simulate.
   
 Open a new broser tab/window, and open the file `index.html`.
 
-Press the `connect` button, and that's it! (the left buttoms of the botton line don't work, though)
+Press the `connect` button, and that's it! (the left buttons of the bottom line don't work, though)
