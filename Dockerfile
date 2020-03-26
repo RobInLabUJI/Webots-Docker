@@ -56,4 +56,8 @@ RUN apt-get update \
 
 USER ${NB_USER}
 
+RUN mkdir -p ${HOME}/.config/Cyberbotics
+
+ADD Webots-R2018b.conf ${HOME}/.config/Cyberbotics
+
 EXPOSE 1234
