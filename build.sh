@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t webots-docker:8.4 .
+docker build -t webots-docker:R2020a .
