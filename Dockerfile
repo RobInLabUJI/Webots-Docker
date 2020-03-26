@@ -35,9 +35,9 @@ EXPOSE 8888
 
 RUN mkdir ${HOME}/webots
 
-RUN wget --no-check-certificate https://github.com/cyberbotics/webots/releases/download/R2019a/webots-R2018b-x86-64.tar.bz2 \
- && tar xjf webots-R2018b-x86-64.tar.bz2 \
- && rm webots-R2018b-x86-64.tar.bz2
+RUN wget --no-check-certificate https://github.com/cyberbotics/webots/releases/download/R2020a-rev1/webots-R2020a-rev1-x86-64.tar.bz2 \
+ && tar xjf webots-R2020a-rev1-x86-64.tar.bz2 \
+ && rm webots-R2020a-rev1-x86-64.tar.bz2
 
 USER root
  
@@ -61,15 +61,15 @@ RUN apt-get update \
   xpra xorg-dev libgl1-mesa-dev mesa-utils libgl1-mesa-glx xvfb libxkbcommon-x11-dev \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-USER ${NB_USER}
+#USER ${NB_USER}
 
-RUN mkdir -p ${HOME}/.config/Cyberbotics
+#RUN mkdir -p ${HOME}/.config/Cyberbotics
 
-ADD Webots-R2018b.conf ${HOME}/.config/Cyberbotics
+#ADD Webots-R2018b.conf ${HOME}/.config/Cyberbotics
 
-USER root
+#USER root
 
-RUN chown jovyan.jovyan ${HOME}/.config/Cyberbotics/Webots-R2018b.conf
+#RUN chown jovyan.jovyan ${HOME}/.config/Cyberbotics/Webots-R2018b.conf
 
 ################################## JUPYTERLAB ##################################
 
