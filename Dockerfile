@@ -1,10 +1,6 @@
-FROM ros:melodic-ros-base
+FROM nvidia/opengl:1.1-glvnd-runtime-ubuntu16.04
 
-ARG NB_USER="jovyan"
-ARG NB_UID="1000"
-ARG NB_GID="100"
-
-USER root
+################################## JUPYTERLAB ##################################
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
@@ -12,33 +8,39 @@ ENV LC_ALL C.UTF-8
 
 RUN apt-get update \
  && apt-get install -yq --no-install-recommends \
-    locales cmake git build-essential python-pip python-setuptools \
- && apt-get clean && rm -rf /var/lib/apt/lists/*
+	locales wget bzip2 \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
-RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
-    locale-gen
+ ENV SHELL=/bin/bash \
+ 	NB_USER=jovyan \
+ 	NB_UID=1000 \
+ 	LANG=en_US.UTF-8 \
+ 	LANGUAGE=en_US.UTF-8
 
-RUN python -m pip install --upgrade pip setuptools
+ ENV HOME=/home/${NB_USER}
 
-RUN python -m pip install jupyterlab
+ RUN adduser --disabled-password \
+ 	--gecos "Default user" \
+ 	--uid ${NB_UID} \
+ 	${NB_USER}
 
-ENV SHELL=/bin/bash \
-	NB_USER=jovyan \
-	NB_UID=1000 \
-	LANG=en_US.UTF-8 \
-	LANGUAGE=en_US.UTF-8
+USER ${NB_USER}
 
-ENV HOME=/home/${NB_USER}
-
-RUN adduser --disabled-password \
-	--gecos "Default user" \
-	--uid ${NB_UID} \
-	${NB_USER}
+WORKDIR ${HOME}
 
 EXPOSE 8888
+ 
+ #################################### WEBOTS ####################################
 
-# Webots
+RUN mkdir ${HOME}/webots
 
+RUN wget --no-check-certificate https://github.com/cyberbotics/webots/releases/download/R2019a/webots-R2018b-x86-64.tar.bz2 \
+ && tar xjf webots-R2018b-x86-64.tar.bz2 \
+ && rm webots-R2018b-x86-64.tar.bz2
+
+USER root
+ 
 RUN apt-get update \
  && apt-get install -yq --no-install-recommends \
     openjdk-8-jdk git g++ cmake libusb-dev swig python2.7-dev \
@@ -54,23 +56,4 @@ RUN apt-get update \
 
 USER ${NB_USER}
 
-WORKDIR ${HOME}
-
-RUN cd ${HOME} \
- && git clone https://github.com/cyberbotics/webots.git \
- && cd ${HOME}/webots \
- && export WEBOTS_HOME=${HOME}/webots \
- && export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
- && git submodule init \
- && git submodule update
-
-RUN cd ${HOME}/webots \
- && export WEBOTS_HOME=${HOME}/webots \
- && export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
- && make -j1
-
 EXPOSE 1234
-
-ADD launch_webots.sh /home/jovyan/
-
-CMD ["jupyter", "lab", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token=''"]
