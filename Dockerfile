@@ -61,16 +61,6 @@ RUN apt-get update \
   xpra xorg-dev libgl1-mesa-dev mesa-utils libgl1-mesa-glx xvfb libxkbcommon-x11-dev \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-#USER ${NB_USER}
-
-#RUN mkdir -p ${HOME}/.config/Cyberbotics
-
-#ADD Webots-R2018b.conf ${HOME}/.config/Cyberbotics
-
-#USER root
-
-#RUN chown jovyan.jovyan ${HOME}/.config/Cyberbotics/Webots-R2018b.conf
-
 ################################## JUPYTERLAB ##################################
 
 RUN apt-get update \
@@ -82,6 +72,9 @@ RUN apt-get update \
 
 RUN pip3 install --upgrade pip setuptools \
  && python3 -m pip install jupyterlab
+
+RUN pip3 install bash_kernel \
+  && python3 -m bash_kernel.install
   
 CMD ["jupyter", "lab", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token=''"]
 
