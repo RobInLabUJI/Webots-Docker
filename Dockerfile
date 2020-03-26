@@ -60,4 +60,6 @@ RUN mkdir -p ${HOME}/.config/Cyberbotics
 
 ADD Webots-R2018b.conf ${HOME}/.config/Cyberbotics
 
+RUN chown jovyan.jovyan ${HOME}/.config/Cyberbotics/Webots-R2018b.conf
+
 EXPOSE 1234
