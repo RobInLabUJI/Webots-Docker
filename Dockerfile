@@ -64,6 +64,20 @@ USER root
 
 RUN chown jovyan.jovyan ${HOME}/.config/Cyberbotics/Webots-R2018b.conf
 
+################################## JUPYTERLAB ##################################
+
+RUN apt-get update \
+ && apt-get install -yq --no-install-recommends \
+    cmake git build-essential python-pip \
+    python3-pip python3-setuptools \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install --upgrade pip setuptools \
+ && python3 -m pip install jupyterlab
+  
+CMD ["jupyter", "lab", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token=''"]
+
 USER ${NB_USER}
 
 EXPOSE 1234
