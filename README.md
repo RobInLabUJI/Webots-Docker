@@ -8,6 +8,10 @@ Clone this repository and build the docker image with:
 ````
 ./build.sh
 ````
+Or pull a pre-built image with:
+````
+docker pull ecervera/webots-docker:R2020a
+````
 
 ## Run
 Open a terminal and run:
