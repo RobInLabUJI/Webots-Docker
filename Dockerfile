@@ -76,6 +76,9 @@ RUN pip3 install --upgrade pip setuptools \
 RUN pip3 install bash_kernel \
   && python3 -m bash_kernel.install
   
+ADD index.ipynb ${HOME}
+RUN chown jovyan.jovyan ${HOME}/index.ipynb
+
 CMD ["jupyter", "lab", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token=''"]
 
 USER ${NB_USER}
