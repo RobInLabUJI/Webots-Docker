@@ -54,6 +54,13 @@ RUN apt-get update \
  xpra xorg-dev libgl1-mesa-dev mesa-utils libgl1-mesa-glx xvfb libxkbcommon-x11-dev \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+ RUN apt-get update \
+  && apt-get install -yq --no-install-recommends \
+  xvfb lsb-release wget unzip zip libnss3 libnspr4 libxcomposite1 libxcursor1 \
+  libxi6 libxrender1 libxss1 libasound2 libdbus-1-3 xserver-xorg-video-dummy \
+  xpra xorg-dev libgl1-mesa-dev mesa-utils libgl1-mesa-glx xvfb libxkbcommon-x11-dev \
+  && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 USER ${NB_USER}
 
 RUN mkdir -p ${HOME}/.config/Cyberbotics
