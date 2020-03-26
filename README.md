@@ -15,7 +15,4 @@ Open a terminal and run:
 ./launch.sh
 ````
 
-In the container terminal, run:
-````
-./webots/webots
-````
+In a browser, open this link: [http://localhost:8888/lab/tree/index.ipynb](http://localhost:8888/lab/tree/index.ipynb)
